@@ -1,0 +1,16 @@
+﻿@{
+    ViewBag.Title = "Home Page";
+}
+
+
+
+<h1>Welcome</h1>
+<p>Ask a question: </p>
+
+@Html.TextBox("Question")
+@Html.ActionLink("Ask!", "Answer")
+<p>
+    The answer is { @ViewBag.Answer }
+</p>
+
+

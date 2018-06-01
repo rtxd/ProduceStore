@@ -1,0 +1,66 @@
+﻿@model UTS.ProduceStore.WebFrontEnd.Models.Produce
+
+@{
+    ViewBag.Title = "Details";
+}
+
+<h2>Details</h2>
+
+<div>
+    <h4>Produce</h4>
+    <hr />
+    <dl class="dl-horizontal">
+        <dt>
+            @Html.DisplayNameFor(model => model.ProduceName)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.ProduceName)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.ProduceType)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.ProduceType)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Season)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Season)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Price)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Price)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Stock)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Stock)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.PluralName)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.PluralName)
+        </dd>
+
+    </dl>
+</div>
+<p>
+    @Html.ActionLink("Edit", "Edit", new { id = Model.ProduceId }) |
+    @Html.ActionLink("Back to List", "Index")
+</p>

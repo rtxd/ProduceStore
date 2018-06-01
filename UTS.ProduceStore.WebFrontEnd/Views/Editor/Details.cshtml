@@ -1,0 +1,58 @@
+﻿@model UTS.ProduceStore.WebFrontEnd.Models.Rule
+
+@{
+    ViewBag.Title = "Details";
+}
+
+<h2>Details</h2>
+
+<div>
+    <h4>Rule</h4>
+    <hr />
+    <dl class="dl-horizontal">
+        <dt>
+            @Html.DisplayNameFor(model => model.RegularExpression)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.RegularExpression)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.RegExGroup)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.RegExGroup)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Query)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Query)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.RuleStatus)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.RuleStatus)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.LastUpdateUser)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.LastUpdateUser)
+        </dd>
+
+    </dl>
+</div>
+<p>
+    @Html.ActionLink("Edit", "Edit", new { id = Model.RuleId }) |
+    @Html.ActionLink("Back to List", "Index")
+</p>

@@ -1,0 +1,63 @@
+﻿@model IEnumerable<UTS.ProduceStore.WebFrontEnd.Models.Produce>
+
+@{
+    ViewBag.Title = "Index";
+}
+
+<h2>Index</h2>
+
+<p>
+    @Html.ActionLink("Create New", "Create")
+</p>
+<table class="table">
+    <tr>
+        <th>
+            @Html.DisplayNameFor(model => model.ProduceName)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.ProduceType)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Season)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Price)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Stock)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.PluralName)
+        </th>
+        <th></th>
+    </tr>
+
+@foreach (var item in Model) {
+    <tr>
+        <td>
+            @Html.DisplayFor(modelItem => item.ProduceName)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.ProduceType)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Season)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Price)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Stock)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.PluralName)
+        </td>
+        <td>
+            @Html.ActionLink("Edit", "Edit", new { id=item.ProduceId }) |
+            @Html.ActionLink("Details", "Details", new { id=item.ProduceId }) |
+            @Html.ActionLink("Delete", "Delete", new { id=item.ProduceId })
+        </td>
+    </tr>
+}
+
+</table>
