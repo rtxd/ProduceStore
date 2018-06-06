@@ -6,8 +6,9 @@ using System.Threading.Tasks;
 
 namespace UTS.ProduceStore.DomainLogic
 {
-    public class EditorService
+    public class ProduceService
     {
-
+        //Domain code for Data Maintainer 
+        
     }
 }
