@@ -7,6 +7,7 @@ using System.Net;
 using System.Web;
 using System.Web.Mvc;
 using UTS.ProduceStore.WebFrontEnd.Models;
+using UTS.ProduceStore.Data;
 
 namespace UTS.ProduceStore.WebFrontEnd.Controllers
 {
@@ -27,14 +28,14 @@ namespace UTS.ProduceStore.WebFrontEnd.Controllers
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-            Models.Rule rule = db.Rules.Find(id);
+            Data.Rule rule = db.Rules.Find(id);
             if (rule == null)
             {
                 return HttpNotFound();
             }
             return View(rule);
         }
-
+        
         // GET: Editor/Create
         public ActionResult Create()
         {
@@ -46,7 +47,7 @@ namespace UTS.ProduceStore.WebFrontEnd.Controllers
         // more details see https://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Create([Bind(Include = "RuleId,RegularExpression,RegExGroup,Query,RuleStatus,LastUpdateUser")] Models.Rule rule)
+        public ActionResult Create([Bind(Include = "RuleId,RegularExpression,RegExGroup,Query,RuleStatus,LastUpdateUser")] Data.Rule rule)
         {
             if (ModelState.IsValid)
             {
@@ -58,27 +59,27 @@ namespace UTS.ProduceStore.WebFrontEnd.Controllers
             return View(rule);
         }
 
-        // GET: Editor/Edit/5
+        // GET: Editor/Edit/5        
         public ActionResult Edit(int? id)
         {
             if (id == null)
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-            Models.Rule rule = db.Rules.Find(id);
+            Data.Rule rule = db.Rules.Find(id);
             if (rule == null)
             {
                 return HttpNotFound();
             }
             return View(rule);
         }
-
+        
         // POST: Editor/Edit/5
         // To protect from overposting attacks, please enable the specific properties you want to bind to, for 
         // more details see https://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Edit([Bind(Include = "RuleId,RegularExpression,RegExGroup,Query,RuleStatus,LastUpdateUser")] Models.Rule rule)
+        public ActionResult Edit([Bind(Include = "RuleId,RegularExpression,RegExGroup,Query,RuleStatus,LastUpdateUser")] Data.Rule rule)
         {
             if (ModelState.IsValid)
             {
@@ -90,26 +91,27 @@ namespace UTS.ProduceStore.WebFrontEnd.Controllers
         }
 
         // GET: Editor/Delete/5
+        
         public ActionResult Delete(int? id)
         {
             if (id == null)
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-            Models.Rule rule = db.Rules.Find(id);
+            Data.Rule rule = db.Rules.Find(id);
             if (rule == null)
             {
                 return HttpNotFound();
             }
             return View(rule);
         }
-
+        
         // POST: Editor/Delete/5
         [HttpPost, ActionName("Delete")]
         [ValidateAntiForgeryToken]
         public ActionResult DeleteConfirmed(int id)
         {
-            Models.Rule rule = db.Rules.Find(id);
+            Data.Rule rule = db.Rules.Find(id);
             db.Rules.Remove(rule);
             db.SaveChanges();
             return RedirectToAction("Index");

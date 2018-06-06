@@ -7,7 +7,7 @@
 // </auto-generated>
 //------------------------------------------------------------------------------
 
-namespace UTS.ProduceStore.WebFrontEnd.Models
+namespace UTS.ProduceStore.Data
 {
     using System;
     using System.Data.Entity;

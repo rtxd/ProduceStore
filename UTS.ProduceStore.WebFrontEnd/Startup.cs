@@ -10,8 +10,6 @@ namespace UTS.ProduceStore.WebFrontEnd
     {
         public void Configuration(IAppBuilder app)
         {
-            string path = Path.GetFullPath(Path.Combine(AppDomain.CurrentDomain.BaseDirectory, @"..\Data"));
-            AppDomain.CurrentDomain.SetData("DataDirectory", path);
             ConfigureAuth(app);
         }
     }

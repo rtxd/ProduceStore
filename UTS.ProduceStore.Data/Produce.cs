@@ -7,18 +7,19 @@
 // </auto-generated>
 //------------------------------------------------------------------------------
 
-namespace UTS.ProduceStore.WebFrontEnd.Models
+namespace UTS.ProduceStore.Data
 {
     using System;
     using System.Collections.Generic;
     
-    public partial class Rule
+    public partial class Produce
     {
-        public int RuleId { get; set; }
-        public string RegularExpression { get; set; }
-        public int RegExGroup { get; set; }
-        public string Query { get; set; }
-        public string RuleStatus { get; set; }
-        public string LastUpdateUser { get; set; }
+        public int ProduceId { get; set; }
+        public string ProduceName { get; set; }
+        public string ProduceType { get; set; }
+        public string Season { get; set; }
+        public double Price { get; set; }
+        public int Stock { get; set; }
+        public string PluralName { get; set; }
     }
 }
