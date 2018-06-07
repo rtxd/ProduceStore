@@ -46,8 +46,8 @@
                 @Html.DisplayFor(modelItem => item.LastUpdateUser)
             </td>
             <td>
-                @Html.ActionLink("Edit", "Edit", new { id = item.RuleId }) |
-                @Html.ActionLink("Details", "Details", new { id = item.RuleId }) |
+                @Html.ActionLink("Approve", "Approve", new { id = item.RuleId }) |
+                @Html.ActionLink("Reject", "Reject", new { id = item.RuleId }) |
             </td>
         </tr>
     }

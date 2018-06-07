@@ -19,6 +19,7 @@ namespace UTS.ProduceStore.WebFrontEnd.Controllers
         // GET: DataMaintainer
         public ActionResult Index()
         {
+            //throw new NotImplementedException();
             return View(db.Produces.ToList());
         }
 

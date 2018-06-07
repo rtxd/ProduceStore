@@ -79,5 +79,14 @@ namespace UTS.ProduceStore.DomainLogic
         }
 
         //Approver Methods
+        public void Approve(Rule rule)
+        {
+            using (var db = new ProduceStoreEntities())
+            {
+                rule.RuleStatus = "Approved";
+                db.Entry(rule).State = EntityState.Modified;
+                db.SaveChanges();
+            }
+        }
     }
 }
