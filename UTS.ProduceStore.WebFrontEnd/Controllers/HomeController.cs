@@ -1,8 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Web;
-using System.Web.Mvc;
+﻿using System.Web.Mvc;
 using UTS.ProduceStore.DomainLogic;
 using UTS.ProduceStore.WebFrontEnd.Models;
 
@@ -10,24 +6,20 @@ namespace UTS.ProduceStore.WebFrontEnd.Controllers
 {
     public class HomeController : Controller
     {
+        /// <summary>
+        /// Index page
+        /// </summary>
+        /// <returns>Index View</returns>
         public ActionResult Index()
         {
             return View();
         }
 
-        public ActionResult About()
-        {
-            ViewBag.Message = "Your application description page.";
-
-            return View();
-        }
-
-        public ActionResult Contact()
-        {
-            ViewBag.Message = "Your contact page.";
-            return View();
-        }
-
+        /// <summary>
+        /// Takes the users questions and finds an answer
+        /// </summary>
+        /// <param name="model"></param>
+        /// <returns>Returns a view with an answer</returns>
         [HttpPost]
         public ActionResult Answer(HomeModel model)
         {
