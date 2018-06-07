@@ -8,13 +8,14 @@ using System.Web;
 using System.Web.Mvc;
 using UTS.ProduceStore.WebFrontEnd.Models;
 using UTS.ProduceStore.Data;
+using UTS.ProduceStore.DomainLogic;
 
 namespace UTS.ProduceStore.WebFrontEnd.Controllers
 {
     public class DataMaintainerController : Controller
     {
         private ProduceStoreEntities db = new ProduceStoreEntities();
-
+        private ProduceService service = new ProduceService();
         // GET: DataMaintainer
         public ActionResult Index()
         {

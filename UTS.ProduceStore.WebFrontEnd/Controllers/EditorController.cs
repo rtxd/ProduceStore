@@ -19,7 +19,7 @@ namespace UTS.ProduceStore.WebFrontEnd.Controllers
         // GET: Editor
         public ActionResult Index()
         {
-            return View(service.GetRulesByStatus("Approved")); //Change the status to "Pending" once more data
+            return View(service.GetRulesByStatus("Pending")); //Change the status to "Pending" once more data
         }
 
         // GET: Editor/Details/5

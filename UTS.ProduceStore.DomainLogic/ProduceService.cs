@@ -7,11 +7,12 @@ using UTS.ProduceStore.Data;
 
 namespace UTS.ProduceStore.DomainLogic
 {
+    
     public class ProduceService
     {
         //Domain code for Data Maintainer 
         
-        //Method for retreiving all products
+        //Method for retreiving all produce
         /*public List<Produce> AllProduce()
         {
 

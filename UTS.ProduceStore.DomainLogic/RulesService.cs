@@ -27,7 +27,11 @@ namespace UTS.ProduceStore.DomainLogic
         }
         
 
-        //Method for retrieving a single Rule
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="id"></param>
+        /// <returns></returns>
         public Rule GetRuleById(int id)
         {
             using (var db = new ProduceStoreEntities())
@@ -48,6 +52,7 @@ namespace UTS.ProduceStore.DomainLogic
         {
             using (var db = new ProduceStoreEntities())
             {
+                rule.RuleStatus = "Pending";
                 db.Rules.Add(rule);
                 db.SaveChanges();
             }
