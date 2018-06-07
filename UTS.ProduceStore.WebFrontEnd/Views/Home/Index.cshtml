@@ -1,4 +1,6 @@
-﻿@{
+﻿@using UTS.ProduceStore.WebFrontEnd.Models;
+@model HomeModel
+@{
     ViewBag.Title = "Home Page";
 }
 
@@ -7,10 +9,17 @@
 <h1>Welcome</h1>
 <p>Ask a question: </p>
 
-@Html.TextBox("Question")
-@Html.ActionLink("Ask!", "Answer")
+<!--Html.EditorFor(model => model.Question)Html.TextBox("questionBox")
+<input type="text" id="questionBox" name="question"/>
+Html.ActionLink("Ask!", "Answer")-->
+@using (Html.BeginForm("Answer", "Home", FormMethod.Post))
+{
+    @Html.TextBoxFor(model => model.Question)
+    <button type="submit">Ask!</button>
+}
+
 <p>
-    The answer is { @ViewBag.Answer }
+    @ViewBag.Answer
 </p>
 
 

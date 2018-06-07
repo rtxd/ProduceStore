@@ -3,6 +3,8 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Web;
 using System.Web.Mvc;
+using UTS.ProduceStore.DomainLogic;
+using UTS.ProduceStore.WebFrontEnd.Models;
 
 namespace UTS.ProduceStore.WebFrontEnd.Controllers
 {
@@ -23,14 +25,15 @@ namespace UTS.ProduceStore.WebFrontEnd.Controllers
         public ActionResult Contact()
         {
             ViewBag.Message = "Your contact page.";
-
             return View();
         }
 
-        public ActionResult Answer()
+        [HttpPost]
+        public ActionResult Answer(HomeModel model)
         {
-            ViewBag.Answer = "Replace this text with answer";
-            return View("Index");
+            RuleEngine ruleEngine = new RuleEngine();
+            ViewBag.Answer = ruleEngine.Answer(model.Question);
+            return View("Index", model);
         }
     }
 }
