@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Data.Entity;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -57,9 +58,13 @@ namespace UTS.ProduceStore.DomainLogic
         }
 
         //Method for deleting product
-        /*public void Delete()
+        public void Delete(Produce produce)
         {
-
-        }*/
+            using (var db = new ProduceStoreEntities())
+            {
+                db.Produces.Remove(produce);
+                db.SaveChanges();
+            }
+        }
     }
 }
