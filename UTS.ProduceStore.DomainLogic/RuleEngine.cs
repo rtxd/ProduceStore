@@ -41,17 +41,18 @@ namespace UTS.ProduceStore.DomainLogic
 
 
             string answer = "Sorry, I don't understand";
-            foreach(Rule rule in ruleCollection)
-            {
-                if (rule.RuleStatus == "Rejected" || rule.RuleStatus == "Pending") break;
-                regex = new Regex(rule.RegularExpression);
-                match = regex.Match(question);
-                if(match.Success)
+            if(question != null)
+                foreach(Rule rule in ruleCollection)
                 {
-                    answer = QueryProduces(rule.Query.Replace("{0}", match.Groups[rule.RegExGroup].Value));
+                    if (rule.RuleStatus == "Rejected" || rule.RuleStatus == "Pending") break;
+                    regex = new Regex(rule.RegularExpression);
+                    match = regex.Match(question);
+                    if(match.Success)
+                    {
+                        answer = QueryProduces(rule.Query.Replace("{0}", match.Groups[rule.RegExGroup].Value));
                     
+                    }
                 }
-            }
 
             return answer.Trim();
         }

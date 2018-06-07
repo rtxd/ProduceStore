@@ -4,22 +4,19 @@
     ViewBag.Title = "Home Page";
 }
 
-
-
-<h1>Welcome</h1>
-<p>Ask a question: </p>
-
-<!--Html.EditorFor(model => model.Question)Html.TextBox("questionBox")
-<input type="text" id="questionBox" name="question"/>
-Html.ActionLink("Ask!", "Answer")-->
-@using (Html.BeginForm("Answer", "Home", FormMethod.Post))
-{
-    @Html.TextBoxFor(model => model.Question)
-    <button type="submit">Ask!</button>
-}
-
-<p>
-    @ViewBag.Answer
-</p>
+<div align="center">
+    <h1>Welcome!</h1>
+    <p>Ask a question: </p>
+    <br />
+    @using (Html.BeginForm("Answer", "Home", FormMethod.Post))
+    {
+        @Html.TextBoxFor(model => model.Question, new { style = "width:500px" })
+        <button type="submit">Ask!</button>
+    }
+    <br />
+    <p>
+        @ViewBag.Answer
+    </p>
+</div>
 
 
