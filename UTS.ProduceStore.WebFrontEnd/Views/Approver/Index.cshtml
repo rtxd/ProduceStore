@@ -1,5 +1,5 @@
-﻿@model IEnumerable<UTS.ProduceStore.WebFrontEnd.Models.Rule>
-
+﻿@using UTS.ProduceStore.Data
+@model IEnumerable<Rule>
 @{
     ViewBag.Title = "Index";
 }
@@ -27,28 +27,29 @@
         <th></th>
     </tr>
 
-@foreach (var item in Model) {
-    <tr>
-        <td>
-            @Html.DisplayFor(modelItem => item.RegularExpression)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.RegExGroup)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.Query)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.RuleStatus)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.LastUpdateUser)
-        </td>
-        <td>
-            @Html.ActionLink("Edit", "Edit", new { id=item.RuleId }) |
-            @Html.ActionLink("Details", "Details", new { id=item.RuleId }) |
-        </td>
-    </tr>
-}
+    @foreach (var item in Model)
+    {
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.RegularExpression)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.RegExGroup)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Query)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.RuleStatus)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.LastUpdateUser)
+            </td>
+            <td>
+                @Html.ActionLink("Edit", "Edit", new { id = item.RuleId }) |
+                @Html.ActionLink("Details", "Details", new { id = item.RuleId }) |
+            </td>
+        </tr>
+    }
 
 </table>

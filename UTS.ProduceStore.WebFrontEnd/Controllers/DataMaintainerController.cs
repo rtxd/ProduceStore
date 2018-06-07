@@ -7,6 +7,7 @@ using System.Net;
 using System.Web;
 using System.Web.Mvc;
 using UTS.ProduceStore.WebFrontEnd.Models;
+using UTS.ProduceStore.Data;
 
 namespace UTS.ProduceStore.WebFrontEnd.Controllers
 {

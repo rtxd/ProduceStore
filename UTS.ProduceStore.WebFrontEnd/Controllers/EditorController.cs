@@ -7,17 +7,19 @@ using System.Net;
 using System.Web;
 using System.Web.Mvc;
 using UTS.ProduceStore.WebFrontEnd.Models;
+using UTS.ProduceStore.Data;
+using UTS.ProduceStore.DomainLogic;
 
 namespace UTS.ProduceStore.WebFrontEnd.Controllers
 {
     public class EditorController : Controller
     {
-        private ProduceStoreEntities db = new ProduceStoreEntities();
+        private RulesService service = new RulesService();
 
         // GET: Editor
         public ActionResult Index()
         {
-            return View(db.Rules.ToList());
+            return View(service.GetRulesByStatus("Approved")); //Change the status to "Pending" once more data
         }
 
         // GET: Editor/Details/5
@@ -27,14 +29,14 @@ namespace UTS.ProduceStore.WebFrontEnd.Controllers
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-            Models.Rule rule = db.Rules.Find(id);
+            Data.Rule rule = service.GetRuleById((int)id);
             if (rule == null)
             {
                 return HttpNotFound();
             }
             return View(rule);
         }
-
+        
         // GET: Editor/Create
         public ActionResult Create()
         {
@@ -46,82 +48,80 @@ namespace UTS.ProduceStore.WebFrontEnd.Controllers
         // more details see https://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Create([Bind(Include = "RuleId,RegularExpression,RegExGroup,Query,RuleStatus,LastUpdateUser")] Models.Rule rule)
+        public ActionResult Create([Bind(Include = "RuleId,RegularExpression,RegExGroup,Query,RuleStatus,LastUpdateUser")] Data.Rule rule)
         {
             if (ModelState.IsValid)
             {
-                db.Rules.Add(rule);
-                db.SaveChanges();
+                service.Add(rule);
                 return RedirectToAction("Index");
             }
 
             return View(rule);
         }
 
-        // GET: Editor/Edit/5
+        // GET: Editor/Edit/5        
         public ActionResult Edit(int? id)
         {
             if (id == null)
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-            Models.Rule rule = db.Rules.Find(id);
+            Data.Rule rule = service.GetRuleById((int)id);
             if (rule == null)
             {
                 return HttpNotFound();
             }
             return View(rule);
         }
-
+        
         // POST: Editor/Edit/5
         // To protect from overposting attacks, please enable the specific properties you want to bind to, for 
         // more details see https://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Edit([Bind(Include = "RuleId,RegularExpression,RegExGroup,Query,RuleStatus,LastUpdateUser")] Models.Rule rule)
+        public ActionResult Edit([Bind(Include = "RuleId,RegularExpression,RegExGroup,Query,RuleStatus,LastUpdateUser")] Data.Rule rule)
         {
             if (ModelState.IsValid)
             {
-                db.Entry(rule).State = EntityState.Modified;
-                db.SaveChanges();
+                service.Update(rule);
                 return RedirectToAction("Index");
             }
             return View(rule);
         }
 
         // GET: Editor/Delete/5
+        
         public ActionResult Delete(int? id)
         {
             if (id == null)
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-            Models.Rule rule = db.Rules.Find(id);
+            Data.Rule rule = service.GetRuleById((int)id);
             if (rule == null)
             {
                 return HttpNotFound();
             }
             return View(rule);
         }
-
+        
         // POST: Editor/Delete/5
         [HttpPost, ActionName("Delete")]
         [ValidateAntiForgeryToken]
         public ActionResult DeleteConfirmed(int id)
         {
-            Models.Rule rule = db.Rules.Find(id);
-            db.Rules.Remove(rule);
-            db.SaveChanges();
+            Data.Rule rule = service.GetRuleById(id);
+            service.Delete(rule);
             return RedirectToAction("Index");
         }
 
-        protected override void Dispose(bool disposing)
+        /*protected override void Dispose(bool disposing)
         {
             if (disposing)
             {
                 db.Dispose();
             }
             base.Dispose(disposing);
-        }
+        }*/
     }
 }

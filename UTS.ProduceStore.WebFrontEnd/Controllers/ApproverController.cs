@@ -7,6 +7,7 @@ using System.Net;
 using System.Web;
 using System.Web.Mvc;
 using UTS.ProduceStore.WebFrontEnd.Models;
+using UTS.ProduceStore.Data;
 
 namespace UTS.ProduceStore.WebFrontEnd.Controllers
 {
@@ -27,7 +28,7 @@ namespace UTS.ProduceStore.WebFrontEnd.Controllers
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-            Models.Rule rule = db.Rules.Find(id);
+            Data.Rule rule = db.Rules.Find(id);
             if (rule == null)
             {
                 return HttpNotFound();
@@ -42,7 +43,7 @@ namespace UTS.ProduceStore.WebFrontEnd.Controllers
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-            Models.Rule rule = db.Rules.Find(id);
+            Data.Rule rule = db.Rules.Find(id);
             if (rule == null)
             {
                 return HttpNotFound();
@@ -55,7 +56,7 @@ namespace UTS.ProduceStore.WebFrontEnd.Controllers
         // more details see https://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Edit([Bind(Include = "RuleStatus")] Models.Rule rule)
+        public ActionResult Edit([Bind(Include = "RuleStatus")] Data.Rule rule)
         {
             if (ModelState.IsValid)
             {
