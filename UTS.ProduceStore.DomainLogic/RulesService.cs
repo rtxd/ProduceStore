@@ -32,6 +32,10 @@ namespace UTS.ProduceStore.DomainLogic
         {
             using (var db = new ProduceStoreEntities())
             {
+                /*return (from r in db.Rules
+                        where r.RuleId == id
+                        select r).First();*/
+                
                 Rule rule = db.Rules.Find(id);
                 return rule;
             }
@@ -68,5 +72,7 @@ namespace UTS.ProduceStore.DomainLogic
                 db.SaveChanges();
             }
         }
+
+        //Approver Methods
     }
 }

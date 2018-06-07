@@ -8,17 +8,18 @@ using System.Web;
 using System.Web.Mvc;
 using UTS.ProduceStore.WebFrontEnd.Models;
 using UTS.ProduceStore.Data;
+using UTS.ProduceStore.DomainLogic;
 
 namespace UTS.ProduceStore.WebFrontEnd.Controllers
 {
     public class EditorController : Controller
     {
-        private ProduceStoreEntities db = new ProduceStoreEntities();
+        private RulesService service = new RulesService();
 
         // GET: Editor
         public ActionResult Index()
         {
-            return View(db.Rules.ToList());
+            return View(service.GetRulesByStatus("Approved")); //Change the status to "Pending" once more data
         }
 
         // GET: Editor/Details/5
@@ -28,7 +29,7 @@ namespace UTS.ProduceStore.WebFrontEnd.Controllers
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-            Data.Rule rule = db.Rules.Find(id);
+            Data.Rule rule = service.GetRuleById((int)id);
             if (rule == null)
             {
                 return HttpNotFound();
@@ -51,8 +52,7 @@ namespace UTS.ProduceStore.WebFrontEnd.Controllers
         {
             if (ModelState.IsValid)
             {
-                db.Rules.Add(rule);
-                db.SaveChanges();
+                service.Add(rule);
                 return RedirectToAction("Index");
             }
 
@@ -66,7 +66,7 @@ namespace UTS.ProduceStore.WebFrontEnd.Controllers
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-            Data.Rule rule = db.Rules.Find(id);
+            Data.Rule rule = service.GetRuleById((int)id);
             if (rule == null)
             {
                 return HttpNotFound();
@@ -83,8 +83,7 @@ namespace UTS.ProduceStore.WebFrontEnd.Controllers
         {
             if (ModelState.IsValid)
             {
-                db.Entry(rule).State = EntityState.Modified;
-                db.SaveChanges();
+                service.Update(rule);
                 return RedirectToAction("Index");
             }
             return View(rule);
@@ -98,7 +97,7 @@ namespace UTS.ProduceStore.WebFrontEnd.Controllers
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-            Data.Rule rule = db.Rules.Find(id);
+            Data.Rule rule = service.GetRuleById((int)id);
             if (rule == null)
             {
                 return HttpNotFound();
@@ -111,19 +110,18 @@ namespace UTS.ProduceStore.WebFrontEnd.Controllers
         [ValidateAntiForgeryToken]
         public ActionResult DeleteConfirmed(int id)
         {
-            Data.Rule rule = db.Rules.Find(id);
-            db.Rules.Remove(rule);
-            db.SaveChanges();
+            Data.Rule rule = service.GetRuleById(id);
+            service.Delete(rule);
             return RedirectToAction("Index");
         }
 
-        protected override void Dispose(bool disposing)
+        /*protected override void Dispose(bool disposing)
         {
             if (disposing)
             {
                 db.Dispose();
             }
             base.Dispose(disposing);
-        }
+        }*/
     }
 }
