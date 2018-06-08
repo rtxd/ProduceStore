@@ -1,16 +1,22 @@
-﻿@{
+﻿@using UTS.ProduceStore.WebFrontEnd.Models;
+@model HomeModel
+@{
     ViewBag.Title = "Home Page";
 }
 
-
-
-<h1>Welcome</h1>
-<p>Ask a question: </p>
-
-@Html.TextBox("Question")
-@Html.ActionLink("Ask!", "Answer")
-<p>
-    The answer is { @ViewBag.Answer }
-</p>
+<div align="center">
+    <h1>Welcome!</h1>
+    <p>Ask a question: </p>
+    <br />
+    @using (Html.BeginForm("Answer", "Home", FormMethod.Post))
+    {
+        @Html.TextBoxFor(model => model.Question, new { style = "width:500px" })
+        <button type="submit">Ask!</button>
+    }
+    <br />
+    <p>
+        @ViewBag.Answer
+    </p>
+</div>
 
 
