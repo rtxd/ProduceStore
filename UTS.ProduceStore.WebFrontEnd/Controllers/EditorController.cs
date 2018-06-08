@@ -59,6 +59,7 @@ namespace UTS.ProduceStore.WebFrontEnd.Controllers
         {
             if (ModelState.IsValid)
             {
+                rule.LastUpdateUser = User.Identity.Name;
                 service.Add(rule);
                 return RedirectToAction("Index");
             }
@@ -90,6 +91,7 @@ namespace UTS.ProduceStore.WebFrontEnd.Controllers
         {
             if (ModelState.IsValid)
             {
+                rule.LastUpdateUser = User.Identity.Name;
                 service.Update(rule);
                 return RedirectToAction("Index");
             }
