@@ -1,5 +1,5 @@
-﻿@using UTS.ProduceStore.Data
-@model IEnumerable<Rule>
+﻿@using UTS.ProduceStore.WebFrontEnd.Models
+@model EditorViewModel
 
 @{
     ViewBag.Title = "Index";
@@ -10,49 +10,64 @@
 <p>
     @Html.ActionLink("Create New", "Create")
 </p>
-<table class="table">
-    <tr>
-        <th>
-            @Html.DisplayNameFor(model => model.RegularExpression)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.RegExGroup)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.Query)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.RuleStatus)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.LastUpdateUser)
-        </th>
-        <th></th>
-    </tr>
+@if (Model.PendingRules.Count > 0)
+{
+    <table class="table">
+        <tr>
+            <th>Regular Expression</th>
+            <th>RegExGroup</th>
+            <th>Query</th>
+            <th>RuleStatus</th>
+            <th>LastUpdateUser</th>
+        </tr>
 
-@foreach (var item in Model) {
-    <tr>
-        <td>
-            @Html.DisplayFor(modelItem => item.RegularExpression)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.RegExGroup)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.Query)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.RuleStatus)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.LastUpdateUser)
-        </td>
-        <td>
-            @Html.ActionLink("Edit", "Edit", new { id=item.RuleId }) |
-            @Html.ActionLink("Details", "Details", new { id=item.RuleId }) |
-            @Html.ActionLink("Delete", "Delete", new { id=item.RuleId })
-        </td>
-    </tr>
+        @foreach (var item in Model.PendingRules)
+        {
+            <tr>
+                <td>@item.RegularExpression</td>
+                <td>@item.RegExGroup</td>
+                <td>@item.Query</td>
+                <td>@item.RuleStatus</td>
+                <td>@item.LastUpdateUser</td>
+
+                <td>
+                    @Html.ActionLink("Edit", "Edit", new { id = item.RuleId }) |
+                    @Html.ActionLink("Details", "Details", new { id = item.RuleId }) |
+                    @Html.ActionLink("Delete", "Delete", new { id = item.RuleId })
+                </td>
+            </tr>
+        }
+
+    </table>
 }
+<h2>Rejected Rules</h2>
+@if (Model.RejectedRules.Count > 0)
+{
+    <table class="table">
+        <tr>
+            <th>Regular Expression</th>
+            <th>RegExGroup</th>
+            <th>Query</th>
+            <th>RuleStatus</th>
+            <th>LastUpdateUser</th>
+        </tr>
 
-</table>
+        @foreach (var item in Model.RejectedRules)
+        {
+            <tr>
+                <td>@item.RegularExpression</td>
+                <td>@item.RegExGroup</td>
+                <td>@item.Query</td>
+                <td>@item.RuleStatus</td>
+                <td>@item.LastUpdateUser</td>
+
+                <td>
+                    @Html.ActionLink("Edit", "Edit", new { id = item.RuleId }) |
+                    @Html.ActionLink("Details", "Details", new { id = item.RuleId }) |
+                    @Html.ActionLink("Delete", "Delete", new { id = item.RuleId })
+                </td>
+            </tr>
+        }
+
+    </table>
+}
