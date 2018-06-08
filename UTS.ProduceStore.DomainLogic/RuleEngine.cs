@@ -18,7 +18,7 @@ namespace UTS.ProduceStore.DomainLogic
         /// Gets all rules from database 
         /// </summary>
         /// <returns>A list of rules</returns>
-        public List<Rule> getRules()
+        public List<Rule> GetRules()
         {
             List<Rule> rules = new List<Rule>();
             using (var db = new ProduceStoreEntities())
@@ -35,26 +35,43 @@ namespace UTS.ProduceStore.DomainLogic
         /// <returns>A string answer to the question</returns>
         public string Answer(string question)
         {
+            Rule conversationRule;
+            string answer = "Sorry, I don't understand";
+            if (question != null)
+            {
+                conversationRule = FindMatchingRule(GetRules(), question);
+                if(conversationRule != null)
+                {
+                    Regex regex = new Regex(conversationRule.RegularExpression);
+                    Match match = regex.Match(question);
+                    answer = QueryProduces(conversationRule.Query.Replace("{0}", match.Groups[conversationRule.RegExGroup].Value));
+                }
+                
+            }
+            return answer.Trim();
+        }
+
+        /// <summary>
+        /// Finds a rule that matches an expression within the list of rules
+        /// </summary>
+        /// <param name="ruleCollection"></param>
+        /// <param name="expression"></param>
+        /// <returns>A rule</returns>
+        public Rule FindMatchingRule(List<Rule> ruleCollection, string expression)
+        {
             Regex regex;
             Match match;
-            ruleCollection = getRules();
-
-
-            string answer = "Sorry, I don't understand";
-            if(question != null)
-                foreach(Rule rule in ruleCollection)
+            foreach (Rule rule in ruleCollection)
+            {
+                if (rule.RuleStatus == "Rejected" || rule.RuleStatus == "Pending") break;
+                regex = new Regex(rule.RegularExpression);
+                match = regex.Match(expression);
+                if (match.Success)
                 {
-                    if (rule.RuleStatus == "Rejected" || rule.RuleStatus == "Pending") break;
-                    regex = new Regex(rule.RegularExpression);
-                    match = regex.Match(question);
-                    if(match.Success)
-                    {
-                        answer = QueryProduces(rule.Query.Replace("{0}", match.Groups[rule.RegExGroup].Value));
-                    
-                    }
+                    return rule;
                 }
-
-            return answer.Trim();
+            }
+            return null;
         }
 
         /// <summary>
