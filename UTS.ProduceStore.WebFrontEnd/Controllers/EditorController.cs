@@ -12,6 +12,7 @@ using UTS.ProduceStore.DomainLogic;
 
 namespace UTS.ProduceStore.WebFrontEnd.Controllers
 {
+    [Authorize(Roles = "Editor")]
     public class EditorController : Controller
     {
         private RulesService service = new RulesService();

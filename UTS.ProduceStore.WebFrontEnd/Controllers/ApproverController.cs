@@ -12,9 +12,10 @@ using UTS.ProduceStore.DomainLogic;
 
 namespace UTS.ProduceStore.WebFrontEnd.Controllers
 {
+    [Authorize(Roles = "Approver")]
     public class ApproverController : Controller
     {
-        private ProduceStoreEntities db = new ProduceStoreEntities();
+        
         private RulesService service = new RulesService();
         // GET: Approver
         public ActionResult Index()
@@ -64,7 +65,7 @@ namespace UTS.ProduceStore.WebFrontEnd.Controllers
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-            Data.Rule rule = db.Rules.Find(id);
+            Data.Rule rule = service.GetRuleById((int)id);
             if (rule == null)
             {
                 return HttpNotFound();

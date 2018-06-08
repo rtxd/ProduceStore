@@ -12,6 +12,7 @@ using UTS.ProduceStore.DomainLogic;
 
 namespace UTS.ProduceStore.WebFrontEnd.Controllers
 {
+    [Authorize(Roles = "DataMaintainer")]
     public class DataMaintainerController : Controller
     {
         private ProduceService service = new ProduceService();

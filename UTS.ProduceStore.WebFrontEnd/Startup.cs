@@ -1,7 +1,10 @@
-﻿using Microsoft.Owin;
+﻿using Microsoft.AspNet.Identity;
+using Microsoft.AspNet.Identity.EntityFramework;
+using Microsoft.Owin;
 using Owin;
 using System;
 using System.IO;
+using UTS.ProduceStore.WebFrontEnd.Models;
 
 [assembly: OwinStartupAttribute(typeof(UTS.ProduceStore.WebFrontEnd.Startup))]
 namespace UTS.ProduceStore.WebFrontEnd
@@ -11,12 +14,17 @@ namespace UTS.ProduceStore.WebFrontEnd
         public void Configuration(IAppBuilder app)
         {
             ConfigureAuth(app);
-            //createRolesandUsers(); 
+            createRolesandUsers(); 
         }
 
-        //source https://code.msdn.microsoft.com/ASPNET-MVC-5-Security-And-44cbdb97
-        //[Authorize(Roles = "Administrator")] Use this above controller
-        /*
+        
+
+        /// <summary>
+        /// This method hardcodes in Users with specific roles.
+        /// This code uses the ApplicationDBContext model.
+        /// This code was created by following the tutorial at 
+        /// source https://code.msdn.microsoft.com/ASPNET-MVC-5-Security-And-44cbdb97
+        /// </summary>
         private void createRolesandUsers()   
         {   
             ApplicationDbContext context = new ApplicationDbContext();   
@@ -25,51 +33,86 @@ namespace UTS.ProduceStore.WebFrontEnd
             var UserManager = new UserManager<ApplicationUser>(new UserStore<ApplicationUser>(context));   
    
    
-            // In Startup iam creating first Admin Role and creating a default Admin User    
-            if (!roleManager.RoleExists("Admin"))   
+              
+            if (!roleManager.RoleExists("Editor"))   
             {   
    
-                // first we create Admin rool   
+                  
                 var role = new Microsoft.AspNet.Identity.EntityFramework.IdentityRole();   
-                role.Name = "Admin";   
+                role.Name = "Editor";   
                 roleManager.Create(role);   
-   
-                //Here we create a Admin super user who will maintain the website                  
+                    
    
                 var user = new ApplicationUser();   
-                user.UserName = "shanu";   
-                user.Email = "syedshanumcain@gmail.com";   
+                user.UserName = "e@editor.com";   
+                user.Email = "e@editor.com";   
    
-                string userPWD = "A@Z200711";   
+                string userPWD = "Abc123!";   
    
                 var chkUser = UserManager.Create(user, userPWD);   
    
-                //Add default User to Role Admin   
+                  
                 if (chkUser.Succeeded)   
                 {   
-                    var result1 = UserManager.AddToRole(user.Id, "Admin");   
+                    var result1 = UserManager.AddToRole(user.Id, "Editor");   
    
                 }   
-            }   
-   
-            // creating Creating Manager role    
-            if (!roleManager.RoleExists("Manager"))   
-            {   
-                var role = new Microsoft.AspNet.Identity.EntityFramework.IdentityRole();   
-                role.Name = "Manager";   
-                roleManager.Create(role);   
-   
-            }   
-   
-            // creating Creating Employee role    
-            if (!roleManager.RoleExists("Employee"))   
-            {   
-                var role = new Microsoft.AspNet.Identity.EntityFramework.IdentityRole();   
-                role.Name = "Employee";   
-                roleManager.Create(role);   
-   
-            }   
+            }
+
+            if (!roleManager.RoleExists("DataMaintainer"))
+            {
+
+              
+                var role = new Microsoft.AspNet.Identity.EntityFramework.IdentityRole();
+                role.Name = "DataMaintainer";
+                roleManager.Create(role);
+
+                                 
+
+                var user = new ApplicationUser();
+                user.UserName = "dm@datamaintainer.com";
+                user.Email = "dm@datamaintainer.com";
+
+                string userPWD = "Abc123!";
+
+                var chkUser = UserManager.Create(user, userPWD);
+
+                
+                if (chkUser.Succeeded)
+                {
+                    var result1 = UserManager.AddToRole(user.Id, "DataMaintainer");
+
+                }
+            }
+
+            if (!roleManager.RoleExists("Approver"))
+            {
+
+                  
+                var role = new Microsoft.AspNet.Identity.EntityFramework.IdentityRole();
+                role.Name = "Approver";
+                roleManager.Create(role);
+
+                                
+
+                var user = new ApplicationUser();
+                user.UserName = "a@approver.com";
+                user.Email = "a@approver.com";
+
+                string userPWD = "Abc123!";
+
+                var chkUser = UserManager.Create(user, userPWD);
+
+                  
+                if (chkUser.Succeeded)
+                {
+                    var result1 = UserManager.AddToRole(user.Id, "Approver");
+
+                }
+            }
+
+            
         } 
-         */
+         
     }
 }
