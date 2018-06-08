@@ -1,0 +1,14 @@
+diff a/UTS.ProduceStore.DomainLogic/ProduceService.cs b/UTS.ProduceStore.DomainLogic/ProduceService.cs	(rejected hunks)
+@@ -19,10 +19,12 @@
+          {
+              using (var db = new ProduceStoreEntities())
+              {
+++<<<<<<< HEAD
+ +                var query = from p in db.Produces
+ +                            where p.ProduceName == name
+ +                            select p;
+ +                return query.ToList();
+++=======
+                  return db.Produces.ToList();
+ +>>>>>>> 15d3039df1fd9c9677bc8d47a1bbe76e9aa748a7
+              }

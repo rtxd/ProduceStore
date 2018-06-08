@@ -8,19 +8,56 @@ using System.Web;
 using System.Web.Mvc;
 using UTS.ProduceStore.WebFrontEnd.Models;
 using UTS.ProduceStore.Data;
+using UTS.ProduceStore.DomainLogic;
 
 namespace UTS.ProduceStore.WebFrontEnd.Controllers
 {
+    [Authorize(Roles = "Approver")]
     public class ApproverController : Controller
     {
-        private ProduceStoreEntities db = new ProduceStoreEntities();
-
+        
+        private RulesService service = new RulesService();
         // GET: Approver
         public ActionResult Index()
         {
-            return View(db.Rules.ToList());
+            return View(service.GetRulesByStatus("Pending"));
         }
 
+        public ActionResult Approve(int? id)
+        {
+            if (id == null)
+            {
+                return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
+            }
+            Data.Rule rule = service.GetRuleById((int)id);
+            
+            if (rule == null)
+            {
+                return HttpNotFound();
+            }
+            rule.RuleStatus = "Approved";
+            service.Update(rule);
+            return RedirectToAction("Index");
+        }
+
+        public ActionResult Reject(int? id)
+        {
+            if (id == null)
+            {
+                return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
+            }
+            Data.Rule rule = service.GetRuleById((int)id);
+
+            if (rule == null)
+            {
+                return HttpNotFound();
+            }
+            rule.RuleStatus = "Rejected";
+            service.Update(rule);
+            return RedirectToAction("Index");
+        }
+        
+        
         // GET: Approver/Details/5
         public ActionResult Details(int? id)
         {
@@ -28,7 +65,7 @@ namespace UTS.ProduceStore.WebFrontEnd.Controllers
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-            Data.Rule rule = db.Rules.Find(id);
+            Data.Rule rule = service.GetRuleById((int)id);
             if (rule == null)
             {
                 return HttpNotFound();
@@ -36,44 +73,6 @@ namespace UTS.ProduceStore.WebFrontEnd.Controllers
             return View(rule);
         }
 
-        // GET: Approver/Edit/5
-        public ActionResult Edit(int? id)
-        {
-            if (id == null)
-            {
-                return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
-            }
-            Data.Rule rule = db.Rules.Find(id);
-            if (rule == null)
-            {
-                return HttpNotFound();
-            }
-            return View(rule);
-        }
-
-        // POST: Approver/Edit/5
-        // To protect from overposting attacks, please enable the specific properties you want to bind to, for 
-        // more details see https://go.microsoft.com/fwlink/?LinkId=317598.
-        [HttpPost]
-        [ValidateAntiForgeryToken]
-        public ActionResult Edit([Bind(Include = "RuleStatus")] Data.Rule rule)
-        {
-            if (ModelState.IsValid)
-            {
-                db.Entry(rule).State = EntityState.Modified;
-                db.SaveChanges();
-                return RedirectToAction("Index");
-            }
-            return View(rule);
-        }
-
-        protected override void Dispose(bool disposing)
-        {
-            if (disposing)
-            {
-                db.Dispose();
-            }
-            base.Dispose(disposing);
-        }
+        
     }
 }

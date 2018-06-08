@@ -15,7 +15,7 @@ namespace UTS.ProduceStore.DomainLogic
         //Domain code for Data Maintainer 
 
         //Method for retreiving all produce
-        public List<Produce> GetProduces(string name)
+        public List<Produce> AllProduce()
         {
             using (var db = new ProduceStoreEntities())
             {
@@ -23,6 +23,7 @@ namespace UTS.ProduceStore.DomainLogic
                             where p.ProduceName == name
                             select p;
                 return query.ToList();
+                return db.Produces.ToList();
             }
         }
 

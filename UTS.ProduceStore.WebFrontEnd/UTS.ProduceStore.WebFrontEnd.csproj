@@ -201,6 +201,7 @@
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
     <Compile Include="Models\AccountViewModels.cs" />
+    <Compile Include="Models\EditorViewModel.cs" />
     <Compile Include="Models\HomeModel.cs" />
     <Compile Include="Models\IdentityModels.cs" />
     <Compile Include="Models\ManageViewModels.cs" />
@@ -275,7 +276,6 @@
     <Content Include="Views\Editor\Edit.cshtml" />
     <Content Include="Views\Editor\Index.cshtml" />
     <Content Include="Views\Approver\Details.cshtml" />
-    <Content Include="Views\Approver\Edit.cshtml" />
     <Content Include="Views\Approver\Index.cshtml" />
   </ItemGroup>
   <ItemGroup>

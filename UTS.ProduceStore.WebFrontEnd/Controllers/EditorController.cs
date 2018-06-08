@@ -12,6 +12,7 @@ using UTS.ProduceStore.DomainLogic;
 
 namespace UTS.ProduceStore.WebFrontEnd.Controllers
 {
+    [Authorize(Roles = "Editor")]
     public class EditorController : Controller
     {
         private RulesService service = new RulesService();
@@ -19,7 +20,14 @@ namespace UTS.ProduceStore.WebFrontEnd.Controllers
         // GET: Editor
         public ActionResult Index()
         {
-            return View(service.GetRulesByStatus("Pending")); //Change the status to "Pending" once more data
+            return View(
+                new EditorViewModel
+                {
+                    PendingRules = service.GetRulesByStatus("Pending"),
+                    RejectedRules = service.GetRulesByStatus("Rejected")
+
+                }
+            ); 
         }
 
         // GET: Editor/Details/5
@@ -52,6 +60,7 @@ namespace UTS.ProduceStore.WebFrontEnd.Controllers
         {
             if (ModelState.IsValid)
             {
+                rule.LastUpdateUser = User.Identity.Name;
                 service.Add(rule);
                 return RedirectToAction("Index");
             }
@@ -83,6 +92,7 @@ namespace UTS.ProduceStore.WebFrontEnd.Controllers
         {
             if (ModelState.IsValid)
             {
+                rule.LastUpdateUser = User.Identity.Name;
                 service.Update(rule);
                 return RedirectToAction("Index");
             }

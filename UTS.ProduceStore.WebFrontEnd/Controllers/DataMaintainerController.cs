@@ -12,15 +12,15 @@ using UTS.ProduceStore.DomainLogic;
 
 namespace UTS.ProduceStore.WebFrontEnd.Controllers
 {
+    [Authorize(Roles = "DataMaintainer")]
     public class DataMaintainerController : Controller
     {
-        private ProduceStoreEntities db = new ProduceStoreEntities();
         private ProduceService service = new ProduceService();
         // GET: DataMaintainer
         public ActionResult Index()
         {
             //throw new NotImplementedException();
-            return View(db.Produces.ToList());
+            return View(service.AllProduce());
         }
 
         // GET: DataMaintainer/Details/5
@@ -30,7 +30,7 @@ namespace UTS.ProduceStore.WebFrontEnd.Controllers
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-            Produce produce = db.Produces.Find(id);
+            Produce produce = service.GetProduceById((int)id);
             if (produce == null)
             {
                 return HttpNotFound();
@@ -53,8 +53,7 @@ namespace UTS.ProduceStore.WebFrontEnd.Controllers
         {
             if (ModelState.IsValid)
             {
-                db.Produces.Add(produce);
-                db.SaveChanges();
+                service.Add(produce);
                 return RedirectToAction("Index");
             }
 
@@ -68,7 +67,7 @@ namespace UTS.ProduceStore.WebFrontEnd.Controllers
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-            Produce produce = db.Produces.Find(id);
+            Produce produce = service.GetProduceById((int)id);
             if (produce == null)
             {
                 return HttpNotFound();
@@ -85,8 +84,7 @@ namespace UTS.ProduceStore.WebFrontEnd.Controllers
         {
             if (ModelState.IsValid)
             {
-                db.Entry(produce).State = EntityState.Modified;
-                db.SaveChanges();
+                service.Update(produce);
                 return RedirectToAction("Index");
             }
             return View(produce);
@@ -99,7 +97,7 @@ namespace UTS.ProduceStore.WebFrontEnd.Controllers
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-            Produce produce = db.Produces.Find(id);
+            Produce produce = service.GetProduceById((int)id);
             if (produce == null)
             {
                 return HttpNotFound();
@@ -112,19 +110,18 @@ namespace UTS.ProduceStore.WebFrontEnd.Controllers
         [ValidateAntiForgeryToken]
         public ActionResult DeleteConfirmed(int id)
         {
-            Produce produce = db.Produces.Find(id);
-            db.Produces.Remove(produce);
-            db.SaveChanges();
+            Produce produce = service.GetProduceById(id);
+            service.Delete(produce);
             return RedirectToAction("Index");
         }
 
-        protected override void Dispose(bool disposing)
+        /*protected override void Dispose(bool disposing)
         {
             if (disposing)
             {
                 db.Dispose();
             }
             base.Dispose(disposing);
-        }
+        }*/
     }
 }
