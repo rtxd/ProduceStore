@@ -19,10 +19,6 @@ namespace UTS.ProduceStore.DomainLogic
         {
             using (var db = new ProduceStoreEntities())
             {
-                var query = from p in db.Produces
-                            where p.ProduceName == name
-                            select p;
-                return query.ToList();
                 return db.Produces.ToList();
             }
         }
