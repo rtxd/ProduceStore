@@ -93,6 +93,7 @@ namespace UTS.ProduceStore.WebFrontEnd.Controllers
             if (ModelState.IsValid)
             {
                 rule.LastUpdateUser = User.Identity.Name;
+                rule.RuleStatus = "Pending";
                 service.Update(rule);
                 return RedirectToAction("Index");
             }

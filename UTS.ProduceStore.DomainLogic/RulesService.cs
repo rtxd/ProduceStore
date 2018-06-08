@@ -64,7 +64,7 @@ namespace UTS.ProduceStore.DomainLogic
 
             using (var db = new ProduceStoreEntities())
             {
-                rule.RuleStatus="Pending";
+                //rule.RuleStatus="Pending";
                 db.Entry(rule).State = EntityState.Modified;
                 try
                 {
