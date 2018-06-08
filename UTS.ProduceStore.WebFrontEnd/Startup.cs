@@ -11,8 +11,10 @@ namespace UTS.ProduceStore.WebFrontEnd
         public void Configuration(IAppBuilder app)
         {
             ConfigureAuth(app);
+            //createRolesandUsers(); 
         }
 
+        //source https://code.msdn.microsoft.com/ASPNET-MVC-5-Security-And-44cbdb97
         //[Authorize(Roles = "Administrator")] Use this above controller
         /*
         private void createRolesandUsers()   
