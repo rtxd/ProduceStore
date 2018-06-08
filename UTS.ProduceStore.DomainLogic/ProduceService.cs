@@ -22,7 +22,7 @@ namespace UTS.ProduceStore.DomainLogic
                 var query = from p in db.Produces
                             where p.ProduceName == name
                             select p;
-                return query.ToList<Produce>();
+                return query.ToList();
             }
         }
 

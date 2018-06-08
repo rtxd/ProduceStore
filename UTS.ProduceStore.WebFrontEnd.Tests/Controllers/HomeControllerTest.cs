@@ -13,7 +13,7 @@ namespace UTS.ProduceStore.WebFrontEnd.Tests.Controllers
     public class HomeControllerTest
     {
         [TestMethod]
-        public void Index()
+        public void Index_ReturnsViewSuccessfuly()
         {
             // Arrange
             HomeController controller = new HomeController();
