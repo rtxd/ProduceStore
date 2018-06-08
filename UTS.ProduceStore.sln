@@ -1,7 +1,7 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 12.00
-# Visual Studio 15
-VisualStudioVersion = 15.0.26430.14
+# Visual Studio 14
+VisualStudioVersion = 14.0.23107.0
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "UTS.ProduceStore.DomainLogic", "UTS.ProduceStore.DomainLogic\UTS.ProduceStore.DomainLogic.csproj", "{A552E2AA-4789-4DC1-A8FF-F67EECE7AAB5}"
 EndProject
@@ -10,6 +10,12 @@ EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "UTS.ProduceStore.WebFrontEnd.Tests", "UTS.ProduceStore.WebFrontEnd.Tests\UTS.ProduceStore.WebFrontEnd.Tests.csproj", "{5E38D217-A832-44F7-BCD5-FE5FBCE68997}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "UTS.ProduceStore.Data", "UTS.ProduceStore.Data\UTS.ProduceStore.Data.csproj", "{DDEA7917-6170-48C9-A31B-0A43702E90B8}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution Items", "{B59B7A3B-FB50-43E2-A6B3-B09B8926CA4F}"
+	ProjectSection(SolutionItems) = preProject
+		.gitattributes = .gitattributes
+		.gitignore = .gitignore
+	EndProjectSection
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
